@@ -3,6 +3,7 @@ package stdext
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 )
 
 const (
@@ -19,4 +20,10 @@ func Exit(failure interface{}) {
 		status = 3
 	}
 	os.Exit(status)
+}
+
+// ExecutableBasename returns the basename of the current executable (i.e.
+// argv0 without its full path).
+func ExecutableBasename() string {
+	return filepath.Base(os.Args[0])
 }
