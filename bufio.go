@@ -8,7 +8,7 @@ import (
 )
 
 // ForEachLine reads lines from r and applies f to each of them. The string
-// arguments to f will not include line-endings.
+// argument to f will not include the line's line-ending character(s).
 func ForEachLine(r io.Reader, f func(string)) error {
 	scanner := bufio.NewScanner(r)
 	for scanner.Scan() {
