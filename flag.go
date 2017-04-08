@@ -16,14 +16,18 @@ import (
 // value of os.Args[0].
 //
 // This function should be called before flag.Parse.
-func SetPreFlagsUsageMessage(desc string, examples ...string) {
+func SetPreFlagsUsageMessage(
+	desc string, unwrapDesc bool, examples ...string) {
+
 	flag.Usage = func() {
 		if desc != "" {
 			desc = strings.TrimSpace(desc)
-			// Un-hardwrap desc but maintain paragraph breaks.
-			desc = strings.Replace(desc, "\n\n", "\035", -1)
-			desc = strings.Replace(desc, "\n", " ", -1)
-			desc = strings.Replace(desc, "\035", "\n\n", -1)
+			if unwrapDesc {
+				// Un-hardwrap desc but maintain paragraph breaks.
+				desc = strings.Replace(desc, "\n\n", "\035", -1)
+				desc = strings.Replace(desc, "\n", " ", -1)
+				desc = strings.Replace(desc, "\035", "\n\n", -1)
+			}
 			fmt.Fprintln(os.Stderr, desc)
 			fmt.Fprintln(os.Stderr)
 		}
