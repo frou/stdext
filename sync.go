@@ -30,9 +30,9 @@ func (a *ConcAtom) Replace(val interface{}) {
 	a.val = val
 }
 
-func (a *ConcAtom) Progress(f func(interface{}) interface{}) {
+func (a *ConcAtom) Advance(old2new func(interface{}) interface{}) {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 
-	a.val = f(a.val)
+	a.val = old2new(a.val)
 }
