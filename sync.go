@@ -36,3 +36,5 @@ func (a *ConcAtom) Advance(old2new func(interface{}) interface{}) {
 
 	a.val = old2new(a.val)
 }
+
+// TODO(DH): CompareAndSwap method
