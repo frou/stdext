@@ -1,3 +1,4 @@
-// Package stdext provides utility functions that wrap selected standard
-// library functionality for increased convenience.
+// Package stdext wraps certain functionality in the standard library so that
+// it is more convenient to use. This package has no dependencies other than
+// the standard library.
 package stdext
