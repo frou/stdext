@@ -1,6 +1,12 @@
 package stdext
 
 import (
+	// TODO(DH): Referencing the testing package here causes the following
+	// problem for commands that import stdext:
+	//
+	// https://stackoverflow.com/questions/37240065/some-how-all-sorts-of-test-argument-flags-showing-up-in-go-program-usage
+	//
+	// So, create a new package stdext/testing to put these functions in?
 	"testing"
 	"testing/quick"
 )
