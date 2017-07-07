@@ -1,12 +1,11 @@
-package stdext
+package testingext
+
+// These functions cannot be in the main stdext package because of the impact
+// that will have on commands importing stdext. See:
+//
+// https://stackoverflow.com/questions/37240065/some-how-all-sorts-of-test-argument-flags-showing-up-in-go-program-usage
 
 import (
-	// TODO(DH): Referencing the testing package here causes the following
-	// problem for commands that import stdext:
-	//
-	// https://stackoverflow.com/questions/37240065/some-how-all-sorts-of-test-argument-flags-showing-up-in-go-program-usage
-	//
-	// So, create a new package stdext/testing to put these functions in?
 	"testing"
 	"testing/quick"
 )
