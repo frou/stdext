@@ -33,9 +33,7 @@ func Exit(failure interface{}) {
 
 // ExecutableBasename returns the basename of the current executable (i.e.
 // argv0 without its full path).
-//
-// TODO(DH): Go 1.8 introduced the following:
-// https://golang.org/pkg/os/#Executable
 func ExecutableBasename() string {
+	// We could use os.Executable() instead of os.Args[0] , but it can fail.
 	return filepath.Base(os.Args[0])
 }
