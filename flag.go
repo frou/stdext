@@ -54,8 +54,12 @@ func ParseFlagsExpectingNArgs(n int) error {
 	if got := flag.NArg(); got != n {
 		flag.Usage()
 		fmt.Fprintln(os.Stderr)
+		plural := "s"
+		if n == 1 {
+			plural = ""
+		}
 		return fmt.Errorf(
-			"Expected %d non-flag argument(s) but got %d", n, got)
+			"Expected %d non-flag argument%s but got %d", n, plural, got)
 	}
 	return nil
 }
