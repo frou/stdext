@@ -12,15 +12,23 @@ const (
 	OwnerWritableReg = 0644
 )
 
-// Exit exits the current process. If failure is non-nil, it is printed to
-// standard error and the process's exit status will be non-zero.
+// Exit exits the current process. If failure is nil, the process exit code
+// will be zero. If failure is an int, the process exit code will be that
+// value. Otherwise, the value of failure will be printed to stderr and the
+// process exit code will be non-zero.
 func Exit(failure interface{}) {
-	var status int
-	if failure != nil {
+	switch failure := failure.(type) {
+	case nil:
+		os.Exit(0)
+	case int:
+		os.Exit(failure)
+	case error:
+		fmt.Fprintf(os.Stderr, "ERROR: %s\n", failure)
+		os.Exit(2)
+	default:
 		fmt.Fprintln(os.Stderr, failure)
-		status = 3
+		os.Exit(3)
 	}
-	os.Exit(status)
 }
 
 // ExecutableBasename returns the basename of the current executable (i.e.
