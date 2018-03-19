@@ -17,3 +17,13 @@ func NormalizeFileExt(ext string) string {
 	ext = strings.TrimLeft(ext, ".")
 	return "." + strings.ToLower(ext)
 }
+
+// Dotted joins the given component strings in order, using . characters as
+// separators. Any leading or trailing dots that are part of a component
+// itself are trimmed.
+func Dotted(components ...string) string {
+	for i, _ := range components {
+		components[i] = strings.Trim(components[i], ".")
+	}
+	return strings.Join(components, ".")
+}
