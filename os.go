@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 )
 
+// Octal values to use for e.g. the perm parameter of os.OpenFile.
 const (
-	// Octal values to use for e.g. the perm parameter of os.OpenFile.
 	OwnerWritableDir = 0755
 	OwnerWritableReg = 0644
 )

@@ -4,7 +4,7 @@ import "sync"
 
 // TODO(DH): Docs
 
-// Clojure-esque construct: http://clojure.org/reference/atoms
+// ConcAtom is intended to be a similar construct to: http://clojure.org/reference/atoms
 type ConcAtom struct {
 	mu  sync.Mutex
 	val interface{}

@@ -22,7 +22,7 @@ func NormalizeFileExt(ext string) string {
 // separators. Any leading or trailing dots that are part of a component
 // itself are trimmed.
 func Dotted(components ...string) string {
-	for i, _ := range components {
+	for i := range components {
 		components[i] = strings.Trim(components[i], ".")
 	}
 	return strings.Join(components, ".")
