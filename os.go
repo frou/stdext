@@ -24,11 +24,10 @@ func Exit(failure interface{}) {
 		os.Exit(failure)
 	case error:
 		fmt.Fprintf(os.Stderr, "ERROR: %s\n", failure)
-		os.Exit(2)
 	default:
 		fmt.Fprintln(os.Stderr, failure)
-		os.Exit(3)
 	}
+	os.Exit(3)
 }
 
 // ExecutableBasename returns the basename of the current executable (i.e.
