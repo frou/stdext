@@ -36,9 +36,13 @@ func (a *ConcAtom) CompareAndSwap(expected, val interface{}) bool {
 	defer a.mu.Unlock()
 
 	defer func() {
-		// It's possible that the == operator panicked with two interface value
-		// operands: https://golang.org/ref/spec#Comparison_operators
-		recover()
+		// It's possible that the == operator will panic when comparing two
+		// values of interface type that have the same dynamic type, when that
+		// type is not "comparable", e.g. a map
+		//
+		// https://golang.org/ref/spec#Comparison_operators
+		_ = recover()
+		// false will be returned from the outer function.
 	}()
 
 	if a.val == expected {
