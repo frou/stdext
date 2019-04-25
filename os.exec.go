@@ -1,6 +1,7 @@
 package stdext
 
 import (
+	"fmt"
 	"os/exec"
 	"runtime"
 )
@@ -19,16 +20,25 @@ import (
 //   Launch("http://repl.it/")
 //   Likely opens that URL in the default web browser on Linux, Windows & OS X
 func Launch(noun string) error {
-	return exec.Command(osLauncher(), noun).Run()
+	launcher, _ := osLauncher()
+	return exec.Command(launcher, noun).Run()
 }
 
-func osLauncher() string {
+func LaunchInBackground(noun string) error {
+	launcher, backgroundFlag := osLauncher()
+	if backgroundFlag == "" {
+		return fmt.Errorf("background flag for '%v' command is unknown", launcher)
+	}
+	return exec.Command(launcher, backgroundFlag, noun).Run()
+}
+
+func osLauncher() (command string, backgroundFlag string) {
 	switch runtime.GOOS {
 	case "darwin":
-		return "open"
+		return "open", "-g"
 	case "windows":
-		return "start"
+		return "start", ""
 	default:
-		return "xdg-open"
+		return "xdg-open", ""
 	}
 }
